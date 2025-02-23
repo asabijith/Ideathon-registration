@@ -75,7 +75,7 @@
 
     <div class="loading-overlay" id="loadingOverlay">
         <span class="line-md--uploading-loop"></span>
-        <p class="loading-text" id="loadingText">Submitting registration...</p>
+        <p class="loading-text" id="loadingText">Submitting registration<span class="eos-icons--three-dots-loading"></span></p>
     </div>
 
     <script>
@@ -145,20 +145,20 @@
                 };
                 
                 const loadingTexts = [
-                    "Checking name...",
-                    "Verifying email...",
-                    "Validating phone number...",
-                    "Confirming college...",
-                    "Processing department...",
-                    "Submitting to spreadsheet..."
-                ];
+    `Checking name..<span class="eos-icons--three-dots-loading"></span>`,
+    `Verifying..<span class="eos-icons--three-dots-loading"></span>`,
+    ` Validating phone number..<span class="eos-icons--three-dots-loading"></span>`,
+    ` Confirming college..<span class="eos-icons--three-dots-loading"></span>`,
+    ` Processing department..<span class="eos-icons--three-dots-loading"></span>`,
+    ` Submitting to spreadsheet..<span class="eos-icons--three-dots-loading"></span>`
+];
 
-                let currentTextIndex = 0;
-                const loadingTextElement = document.getElementById('loadingText');
-                const textInterval = setInterval(() => {
-                    loadingTextElement.textContent = loadingTexts[currentTextIndex];
-                    currentTextIndex = (currentTextIndex + 1) % loadingTexts.length;
-                }, 2000);
+let currentTextIndex = 0;
+const loadingTextElement = document.getElementById('loadingText');
+const textInterval = setInterval(() => {
+    loadingTextElement.innerHTML = loadingTexts[currentTextIndex]; // Changed from textContent to innerHTML
+    currentTextIndex = (currentTextIndex + 1) % loadingTexts.length;
+}, 2000);
 
                 fetch(scriptURL, {
                     method: 'POST',
