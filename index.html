@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Doto:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Ideathon Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <video class="video-background" autoplay muted loop playsinline>
+        <source src="https://dl.dropbox.com/scl/fi/ubjlqxcwgpsmx0thbqbs0/208041_tiny.mp4?rlkey=fjbhb9tcuuvltg17ydmnwba7w&st=qfyz9890&dl=0" type="video/mp4">
+    </video>
+
+    <div class="container" id="formContainer">
+        <div class="form-header">
+            <img src="https://dl.dropbox.com/scl/fi/ee95ubi9k56sngc2hipna/emerging-industries.gif?rlkey=3paqrqcrrint7le1dh2wtpz5y&st=jv8bgrxg&dl=0" alt="">
+            <h1>Ideathon</h1>
+        </div>
+        <form id="registrationForm">
+            <div class="form-group">
+                <input type="text" class="input-field" id="fullName" placeholder=" " required>
+                <label class="input-label" for="fullName"><span class="icon-park-solid--edit-name"></span>Full Name</label>
+                <div class="error-message" id="fullNameError">Please enter your full name</div>
+            </div>
+
+            <div class="form-group">
+                <input type="email" class="input-field" id="email" placeholder=" " required>
+                <label class="input-label" for="email"><span class="mage--email"></span>Email Address</label>
+                <div class="error-message" id="emailError">Please enter a valid email address</div>
+            </div>
+
+            <div class="form-group">
+                <input type="tel" class="input-field" id="phone" placeholder=" " required>
+                <label class="input-label" for="phone"><span class="material-symbols--contact-phone-rounded"></span>Phone Number</label>
+                <div class="error-message" id="phoneError">Please enter a valid 10-digit phone number</div>
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="input-field" id="college" placeholder=" " required>
+                <label class="input-label" for="college"><span class="mdi--rename-box"></span>College Name</label>
+                <div class="error-message" id="collegeError">Please enter your college name</div>
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="input-field" id="department" placeholder=" " required>
+                <label class="input-label" for="department"><span class="fluent-emoji-high-contrast--department-store"></span>Department</label>
+                <div class="error-message" id="departmentError">Please enter your department</div>
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="input-field" id="year" placeholder=" " required>
+                <label class="input-label" for="year"><span class="iwwa--year"></span>Semester</label>
+                <div class="error-message" id="yearError">Please enter your year of study</div>
+            </div>
+
+            <button type="submit" class="submit-button"><span class="formkit--submit"></span>Submit Registration</button>
+        </form>
+    </div>
+
+    <div class="success-container" id="successContainer">
+        <img src="https://dl.dropbox.com/scl/fi/u9k3ks0si1pyga9o9b0c4/approved.gif?rlkey=3x104c2bp78kefke566uog1q3&st=3xftbypw&dl=0" alt="">
+        <h2 class="success-message">Registration Successful!</h2>
+        <p class="success-details">Thank you for registering for the Ideathon. We'll be in touch soon!</p>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <span class="line-md--uploading-loop"></span>
+        <p class="loading-text" id="loadingText">Submitting registration...</p>
+    </div>
+
+    <script>
+        // Add decorative elements
+        function addDecorations() {
+            const body = document.body;
+            for (let i = 0; i < 20; i++) {
+                const decoration = document.createElement('div');
+                decoration.classList.add('decoration');
+                const size = Math.random() * 100 + 50;
+                decoration.style.width = `${size}px`;
+                decoration.style.height = `${size}px`;
+                decoration.style.top = `${Math.random() * 100}%`;
+                decoration.style.left = `${Math.random() * 100}%`;
+                decoration.style.animationDelay = `${Math.random() * 5}s`;
+                body.appendChild(decoration);
+            }
+        }
+
+        addDecorations();
+
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset errors
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.style.display = 'none';
+                error.style.opacity = '0';
+            });
+            
+            // Validate form
+            let isValid = true;
+            
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const college = document.getElementById('college').value.trim();
+            const department = document.getElementById('department').value.trim();
+            const year = document.getElementById('year').value.trim();
+
+            const showError = (elementId) => {
+                const error = document.getElementById(elementId);
+                error.style.display = 'block';
+                setTimeout(() => error.style.opacity = '1', 10);
+                isValid = false;
+            };
+
+            if (!fullName) showError('fullNameError');
+            if (!email || !/^\S+@\S+\.\S+$/.test(email)) showError('emailError');
+            if (!phone || !/^\d{10}$/.test(phone)) showError('phoneError');
+            if (!college) showError('collegeError');
+            if (!department) showError('departmentError');
+            if (!year) showError('yearError');
+            
+            if (isValid) {
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbwo9C2p1v5ry8aVzG6Fiam7REvxVgA2cykPuRHYAAPrWW9fJwC7l1h06pSSip1U8n5P/exec';
+                
+                document.getElementById('loadingOverlay').style.display = 'flex';
+                
+                const formData = {
+                    'Full Name': fullName,
+                    'Email': email,
+                    'Phone': phone,
+                    'College': college,
+                    'Department': department,
+                    'Year': year
+                };
+                
+                const loadingTexts = [
+                    "Checking name...",
+                    "Verifying email...",
+                    "Validating phone number...",
+                    "Confirming college...",
+                    "Processing department...",
+                    "Submitting to spreadsheet..."
+                ];
+
+                let currentTextIndex = 0;
+                const loadingTextElement = document.getElementById('loadingText');
+                const textInterval = setInterval(() => {
+                    loadingTextElement.textContent = loadingTexts[currentTextIndex];
+                    currentTextIndex = (currentTextIndex + 1) % loadingTexts.length;
+                }, 2000);
+
+                fetch(scriptURL, {
+                    method: 'POST',
+                    body: JSON.stringify(formData),
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(() => {
+                    clearInterval(textInterval);
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                    document.getElementById('formContainer').style.display = 'none';
+                    document.getElementById('successContainer').style.display = 'block';
+                })
+                .catch(error => {
+                    clearInterval(textInterval);
+                    console.error('Error:', error);
+                    alert('There was an error submitting the form. Please try again.');
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
